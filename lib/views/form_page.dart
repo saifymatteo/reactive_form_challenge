@@ -87,6 +87,7 @@ class _FormPageState extends State<FormPage> {
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Name',
+                              icon: Icons.person,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -101,6 +102,7 @@ class _FormPageState extends State<FormPage> {
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Email',
+                              icon: Icons.email,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -117,6 +119,7 @@ class _FormPageState extends State<FormPage> {
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Password',
+                              icon: Icons.key,
                               suffix: Material(
                                 child: InkWell(
                                   onTap: () {
@@ -147,6 +150,7 @@ class _FormPageState extends State<FormPage> {
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Password again',
+                              icon: Icons.vpn_key,
                               suffix: Material(
                                 child: InkWell(
                                   onTap: () {
@@ -206,6 +210,7 @@ class _FormPageState extends State<FormPage> {
                                 },
                                 decoration: textFieldDecoration(
                                   hintText: 'Date of Birth',
+                                  icon: Icons.calendar_month,
                                   suffix: suffix,
                                 ),
                               );
@@ -234,6 +239,7 @@ class _FormPageState extends State<FormPage> {
                               textInputAction: TextInputAction.next,
                               decoration: textFieldDecoration(
                                 hintText: 'Other',
+                                icon: Icons.text_fields,
                               ),
                             ),
                           ),
@@ -356,10 +362,12 @@ class _FormPageState extends State<FormPage> {
 
   InputDecoration textFieldDecoration({
     String? hintText,
+    IconData? icon,
     Widget? suffix,
   }) {
     return InputDecoration(
       hintText: hintText,
+      label: icon == null ? null : Icon(icon),
       filled: true,
       isCollapsed: true,
       fillColor: Colors.grey[100],
