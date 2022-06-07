@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:reactive_form_challenge/utils/constants/text.dart';
+import 'package:reactive_form_challenge/utils/helper/form_class.dart';
+import 'package:reactive_form_challenge/views/components/radio_list_tile.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-enum RadioChoice { great, awesome, other }
 
 class FormPage extends StatefulWidget {
   const FormPage({super.key});
@@ -12,40 +13,7 @@ class FormPage extends StatefulWidget {
 }
 
 class _FormPageState extends State<FormPage> {
-  final form = FormGroup(
-    {
-      'name': FormControl<String>(
-        value: 'Das',
-        validators: [Validators.required],
-      ),
-      'email': FormControl<String>(
-        value: 'Das@mail.com',
-        validators: [Validators.email, Validators.required],
-      ),
-      'password': FormControl<String>(
-        value: '12345678',
-        validators: [Validators.required, Validators.minLength(8)],
-      ),
-      'passwordConfirm': FormControl<String>(
-        value: '12345678',
-        validators: [Validators.required],
-      ),
-      'dateBirth': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'answer': FormControl<RadioChoice>(
-        validators: [Validators.required],
-      ),
-      'answerOther': FormControl<String>(),
-      'newsletter': FormControl<bool>(
-        value: true,
-      ),
-    },
-    validators: [
-      Validators.mustMatch('password', 'passwordConfirm'),
-    ],
-  );
-
+  // For password show button
   bool obscurePass = true;
   bool obscurePassCon = true;
 
@@ -57,7 +25,7 @@ class _FormPageState extends State<FormPage> {
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: ReactiveForm(
-            formGroup: form,
+            formGroup: FormClass.form,
             child: ReactiveFormConsumer(
               builder: (context, formGroup, child) {
                 return Column(
@@ -69,7 +37,7 @@ class _FormPageState extends State<FormPage> {
                           const Padding(
                             padding: EdgeInsets.only(top: 10, bottom: 30),
                             child: Text(
-                              'Sign Up',
+                              AppText.signUp,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 30,
@@ -82,8 +50,7 @@ class _FormPageState extends State<FormPage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.name,
                             validationMessages: (control) => {
-                              ValidationMessage.required:
-                                  'Name must not be empty',
+                              ValidationMessage.required: FormClass.nameEmpty
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Name',
@@ -96,9 +63,8 @@ class _FormPageState extends State<FormPage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.emailAddress,
                             validationMessages: (control) => {
-                              ValidationMessage.required:
-                                  'Email must not be empty',
-                              ValidationMessage.email: 'Email must be valid',
+                              ValidationMessage.required: FormClass.emailEmpty,
+                              ValidationMessage.email: FormClass.emailValid,
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Email',
@@ -112,10 +78,8 @@ class _FormPageState extends State<FormPage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.visiblePassword,
                             validationMessages: (control) => {
-                              ValidationMessage.required:
-                                  'Password must not be empty',
-                              ValidationMessage.minLength:
-                                  'Password must be higher than 8 characters',
+                              ValidationMessage.required: FormClass.passEmpty,
+                              ValidationMessage.minLength: FormClass.passMinLen,
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Password',
@@ -145,8 +109,10 @@ class _FormPageState extends State<FormPage> {
                             textInputAction: TextInputAction.next,
                             keyboardType: TextInputType.visiblePassword,
                             validationMessages: (control) => {
-                              ValidationMessage.required: 'Must not be empty',
-                              ValidationMessage.mustMatch: 'Password not match'
+                              ValidationMessage.required:
+                                  FormClass.passConEmpty,
+                              ValidationMessage.mustMatch:
+                                  FormClass.passConMatch,
                             },
                             decoration: textFieldDecoration(
                               hintText: 'Password again',
@@ -200,13 +166,13 @@ class _FormPageState extends State<FormPage> {
                                   picker.showPicker();
                                 },
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('dd MMMM yyyy'),
                                 ),
                                 formControlName: 'dateBirth',
                                 readOnly: true,
                                 validationMessages: (control) => {
                                   ValidationMessage.required:
-                                      'Date of birth must not be empty'
+                                      FormClass.dateEmpty,
                                 },
                                 decoration: textFieldDecoration(
                                   hintText: 'Date of Birth',
@@ -217,15 +183,15 @@ class _FormPageState extends State<FormPage> {
                             },
                           ),
                           const SizedBox(height: 20),
-                          const RadioListTile(
+                          const ReacRadioListTile(
                             title: 'Flutter is great!',
                             choice: RadioChoice.great,
                           ),
-                          const RadioListTile(
+                          const ReacRadioListTile(
                             title: 'Flutter is awesome!',
                             choice: RadioChoice.awesome,
                           ),
-                          const RadioListTile(
+                          const ReacRadioListTile(
                             title: 'Other:',
                             choice: RadioChoice.other,
                           ),
@@ -247,7 +213,7 @@ class _FormPageState extends State<FormPage> {
                           ReactiveCheckboxListTile(
                             formControlName: 'newsletter',
                             title: const Text(
-                              'I would like to receive your newsletter and other promotional information',
+                              AppText.newsletter,
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -264,7 +230,7 @@ class _FormPageState extends State<FormPage> {
                               final email = formGroup.controls['email']!.value;
                               final password =
                                   formGroup.controls['password']!.value;
-                              final date = DateFormat('dd MMM yyyy').format(
+                              final date = DateFormat('dd MMMM yyyy').format(
                                 formGroup.controls['dateBirth']!.value!
                                     as DateTime,
                               );
@@ -315,12 +281,20 @@ class _FormPageState extends State<FormPage> {
                                         contentPadding: EdgeInsets.zero,
                                       ),
                                       ListTile(
-                                        title: Text(choiceOther.toString()),
+                                        title: Text(
+                                          choiceOther == null
+                                              ? 'Empty'
+                                              : choiceOther.toString(),
+                                        ),
                                         leading: const Icon(Icons.text_fields),
                                         contentPadding: EdgeInsets.zero,
                                       ),
                                       ListTile(
-                                        title: Text(newsletter.toString()),
+                                        title: Text(
+                                          (newsletter! as bool)
+                                              ? 'Accept'
+                                              : 'Decline',
+                                        ),
                                         leading: const Icon(Icons.newspaper),
                                         contentPadding: EdgeInsets.zero,
                                       ),
@@ -344,11 +318,11 @@ class _FormPageState extends State<FormPage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                       ),
-                      child: const Text('Sign Up'),
+                      child: const Text(AppText.signUp),
                     ),
                     TextButton(
                       onPressed: () {},
-                      child: const Text('Forgot your password?'),
+                      child: const Text(AppText.forgotPassword),
                     ),
                   ],
                 );
@@ -360,6 +334,7 @@ class _FormPageState extends State<FormPage> {
     );
   }
 
+  // Dynamic [InputDecoration] method
   InputDecoration textFieldDecoration({
     String? hintText,
     IconData? icon,
@@ -393,34 +368,6 @@ class _FormPageState extends State<FormPage> {
         ),
       ),
       suffix: suffix,
-    );
-  }
-}
-
-class RadioListTile extends StatelessWidget {
-  const RadioListTile({
-    super.key,
-    this.choice,
-    this.title,
-  });
-
-  final RadioChoice? choice;
-  final String? title;
-
-  @override
-  Widget build(BuildContext context) {
-    return ReactiveRadioListTile(
-      formControlName: 'answer',
-      value: choice,
-      title: Text(
-        title!,
-        style: const TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
-      contentPadding: EdgeInsets.zero,
-      dense: true,
     );
   }
 }
