@@ -10,9 +10,9 @@ The form design is [here](https://www.figma.com/file/8XSUHjGY26hip1XU6bEks3/June
 
 - ✅ All fields are mandatory
 - ✅ Email must be in the right format
-- Password must be at least 8 characters long and must contain at least a lowercase, an uppercase letter, a number and a symbol.
+- ✅ Password must be at least 8 characters long and must contain at least a lowercase, an uppercase letter, a number and a symbol.
 - ✅ Password and Password again must match
-- The user must be the age 18 or above to be able to sign up.
+- ✅ The user must be the age 18 or above to be able to sign up.
 - If the user selects the other option, the Other field must be filled out as well.
 - ✅ The submit button is enabled only if the form is valid
 
