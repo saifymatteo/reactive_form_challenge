@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.reactive_form_challenge">
+    package="com.saifymatteo.reactive_form_challenge">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
