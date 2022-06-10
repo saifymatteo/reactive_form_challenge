@@ -24,17 +24,12 @@ class FormClass {
   static final form = FormGroup(
     {
       'name': FormControl<String>(
-        value: 'Das',
         validators: [Validators.required],
-        touched: true,
       ),
       'email': FormControl<String>(
-        value: 'Das@mail.com',
         validators: [Validators.email, Validators.required],
-        touched: true,
       ),
       'password': FormControl<String>(
-        value: '12345678Ss@',
         validators: [
           Validators.required,
           Validators.minLength(8),
@@ -55,36 +50,24 @@ class FormClass {
             validationMessage: '$validatePassText symbol',
           ),
         ],
-        touched: true,
       ),
       'passwordConfirm': FormControl<String>(
-        value: '12345678Ss@',
         validators: [Validators.required],
-        touched: true,
       ),
       'dateBirth': FormControl<DateTime>(
-        value: DateTime(2004, 6, 7),
         validators: [
           Validators.required,
           calculateAge,
         ],
-        touched: true,
       ),
       'answer': FormControl<RadioChoice>(
         validators: [Validators.required],
-        touched: true,
       ),
       'answerOther': FormControl<String>(
-        validators: [
-          // TODO(saifymatteo): Need to check whether [RadioChoice.other] is selected in here.
-          // Validators.compare('answer', 'answerOther', CompareOption.equal),
-        ],
-        touched: true,
+        // TODO(saifymatteo): Need to check whether [RadioChoice.other] is selected in here.
+        // validators: [],
       ),
-      'newsletter': FormControl<bool>(
-        value: true,
-        touched: true,
-      ),
+      'newsletter': FormControl<bool>(),
     },
     validators: [
       Validators.mustMatch('password', 'passwordConfirm'),
