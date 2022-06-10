@@ -1,7 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.reactive_form_challenge">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
    <application
-        android:label="reactive_form_challenge"
+        android:label="Reactive Form Challenge"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
