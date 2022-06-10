@@ -1,13 +1,13 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
-// Simple and basic function
+// Simple and accurate date checker function
 //
 // Function to calculate [DateTime] with [ReactiveForm]
 //
 // Taken from [@bryanjorgeflores](https://github.com/joanpablo/reactive_forms/issues/175)
 Map<String, dynamic>? calculateAge(AbstractControl<dynamic> control) {
   // Set message
-  final error = {'Must be over 18 years old': false};
+  final message = {'Must be over 18 years old': false};
 
   // Get current time
   final currentDate = DateTime.now();
@@ -41,7 +41,7 @@ Map<String, dynamic>? calculateAge(AbstractControl<dynamic> control) {
     }
     // Check for [age] below 18
     if (age < 18) {
-      return error;
+      return message;
     }
   }
 
