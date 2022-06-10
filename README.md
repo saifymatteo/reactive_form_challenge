@@ -18,6 +18,10 @@ The form design is [here](https://www.figma.com/file/8XSUHjGY26hip1XU6bEks3/June
 
 If the form is valid the user is redirected to the login page.
 
+## Problem
+
+- I'm unable to make a check on ```enum``` ```RadioChoice.other``` with ```FormControl``` ```'answerOther'```
+
 ## Build
 
 To build the app, simply run in the terminal:
