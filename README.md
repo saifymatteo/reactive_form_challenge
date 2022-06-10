@@ -1,5 +1,7 @@
 # Reactive Form Challenge
 
+![Demo](https://raw.githubusercontent.com/saifymatteo/reactive_form_challenge/master/github/screenshot/sample-demo.png)
+
 This project is a challenge project for [Flutter Challenge](https://flutterchallenge.dev/validate-your-input).
 
 The challenge is to implements a signup form with proper validations by using [reactive_forms](https://pub.dev/packages/reactive_forms) package.
