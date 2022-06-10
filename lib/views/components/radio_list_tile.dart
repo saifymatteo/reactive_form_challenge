@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_form_challenge/utils/helper/form_class.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// For reusable widget only
 class ReacRadioListTile extends StatelessWidget {
   const ReacRadioListTile({
     super.key,

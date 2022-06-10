@@ -24,8 +24,10 @@ class _FormPageState extends State<FormPage> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15),
+          // Set the form section
           child: ReactiveForm(
             formGroup: FormClass.form,
+            // Set consumer at top level for Sign Up button and the rest
             child: ReactiveFormConsumer(
               builder: (context, formGroup, child) {
                 return Column(
@@ -34,6 +36,7 @@ class _FormPageState extends State<FormPage> {
                     Expanded(
                       child: ListView(
                         children: [
+                          // Sign Up header
                           const Padding(
                             padding: EdgeInsets.only(top: 10, bottom: 30),
                             child: Text(
@@ -45,6 +48,8 @@ class _FormPageState extends State<FormPage> {
                               ),
                             ),
                           ),
+
+                          // Name section
                           ReactiveTextField<String>(
                             formControlName: 'name',
                             textInputAction: TextInputAction.next,
@@ -58,6 +63,8 @@ class _FormPageState extends State<FormPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
+
+                          // Email section
                           ReactiveTextField<String>(
                             formControlName: 'email',
                             textInputAction: TextInputAction.next,
@@ -72,6 +79,8 @@ class _FormPageState extends State<FormPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
+
+                          // Password section
                           ReactiveTextField<String>(
                             formControlName: 'password',
                             obscureText: obscurePass,
@@ -136,12 +145,15 @@ class _FormPageState extends State<FormPage> {
                             ),
                           ),
                           const SizedBox(height: 20),
+
+                          // Date of Birth section button
                           ReactiveDatePicker<DateTime>(
                             formControlName: 'dateBirth',
                             firstDate: DateTime(1900),
                             lastDate: DateTime.now(),
                             keyboardType: TextInputType.datetime,
                             builder: (context, picker, child) {
+                              // Set the suffix
                               Widget suffix = Material(
                                 child: InkWell(
                                   onTap: () {
@@ -154,6 +166,7 @@ class _FormPageState extends State<FormPage> {
                                 ),
                               );
 
+                              // In case no value set, change suffix
                               if (picker.value == null) {
                                 suffix = const Icon(
                                   Icons.calendar_today,
@@ -183,6 +196,8 @@ class _FormPageState extends State<FormPage> {
                             },
                           ),
                           const SizedBox(height: 20),
+
+                          // Radio button section
                           const ReacRadioListTile(
                             title: 'Flutter is great!',
                             choice: RadioChoice.great,
@@ -196,6 +211,8 @@ class _FormPageState extends State<FormPage> {
                             choice: RadioChoice.other,
                           ),
                           const SizedBox(height: 20),
+
+                          // Using [Visibility] to hide 'Other' form
                           Visibility(
                             visible: formGroup.controls['answer']!.value ==
                                 RadioChoice.other,
@@ -221,6 +238,8 @@ class _FormPageState extends State<FormPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
+
+                    // Big Sign Up button below with simple check
                     ElevatedButton(
                       onPressed: !formGroup.valid
                           ? null
@@ -320,6 +339,8 @@ class _FormPageState extends State<FormPage> {
                       ),
                       child: const Text(AppText.signUp),
                     ),
+
+                    // Small forgot password button below
                     TextButton(
                       onPressed: () {},
                       child: const Text(AppText.forgotPassword),

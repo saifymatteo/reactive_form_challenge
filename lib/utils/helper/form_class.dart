@@ -1,9 +1,11 @@
 import 'package:reactive_form_challenge/utils/helper/helper.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Enum for [radio] button
 enum RadioChoice { great, awesome, other }
 
 class FormClass {
+  // Default error messages
   static const nameEmpty = 'Name must not be empty';
   static const emailEmpty = 'Email must not be empty';
   static const emailValid = 'Email must be valid';
@@ -20,7 +22,7 @@ class FormClass {
   static const validateSymbol = r'(?=.*?[#?!@$%^&*-])';
   static const validatePassText = 'Must contain a single';
 
-  //
+  // The [FormGroup] used for the form
   static final form = FormGroup(
     {
       'name': FormControl<String>(
@@ -65,7 +67,6 @@ class FormClass {
       ),
       'answerOther': FormControl<String>(
         // TODO(saifymatteo): Need to check whether [RadioChoice.other] is selected in here.
-        // validators: [],
       ),
       'newsletter': FormControl<bool>(),
     },
